@@ -3,172 +3,77 @@
 using namespace std;
 
 int sd[9][9];
+bool rowcheck[9][10];
+bool colcheck[9][10];
+bool sqrcheck[9][10];
 
-void sdoku_1()
+void sdoku_1(int row = 0, int col = 0)
 {
-	for (int i = 0; i < 9; i++)
+	if (row == 9)
 	{
-		for (int j = 0; j < 9; j++)
+		for (int i = 0; i < 9; i++)
 		{
-			if (sd[i][j] == 0)
+			for (int j = 0; j < 9; j++)
 			{
-				int ch[10];
-				fill_n(ch, 10, 1);
-				ch[0] = 0;
+				cout << sd[i][j] << " ";
+			}
+			cout << "\n";
+		}
+		exit(0);
+	}
 
-				for (int a = 0; a < 9; a++)
-				{
-					if (ch[sd[i][a]] == 1)
-						ch[sd[i][a]] = 0;
 
-					if (ch[sd[a][j]] == 1)
-						ch[sd[a][j]] = 0;
-				}
+	if (!sd[row][col])
+	{
+		int sqrnum = (row / 3) * 3 + (col / 3);
 
-				if (i < 3)
-				{
-					if (j < 3)
-					{
-						for (int i3 = 0; i3 < 3; i3++)
-						{
-							for (int j3 = 0; j3 < 3; j3++)
-							{
-								if (ch[sd[i3][j3]] == 1)
-									ch[sd[i3][j3]] = 0;
-							}
-						}
-					}
-
-					else if (j < 6)
-					{
-						for (int i3 = 0; i3 < 3; i3++)
-						{
-							for (int j6 = 3; j6 < 6; j6++)
-							{
-								if (ch[sd[i3][j6]] == 1)
-									ch[sd[i3][j6]] = 0;
-							}
-						}
-					}
-
-					else
-					{
-						for (int i3 = 0; i3 < 3; i3++)
-						{
-							for (int j9 = 6; j9 < 9; j9++)
-							{
-								if (ch[sd[i3][j9]] == 1)
-									ch[sd[i3][j9]] = 0;
-							}
-						}
-					}
-				}
-
-				else if (i < 6)
-				{
-					if (j < 3)
-					{
-						for (int i6 = 3; i6 < 6; i6++)
-						{
-							for (int j3 = 0; j3 < 3; j3++)
-							{
-								if (ch[sd[i6][j3]] == 1)
-									ch[sd[i6][j3]] = 0;
-							}
-						}
-					}
-
-					else if (j < 6)
-					{
-						for (int i6 = 3; i6 < 6; i6++)
-						{
-							for (int j6 = 3; j6 < 6; j6++)
-							{
-								if (ch[sd[i6][j6]] == 1)
-									ch[sd[i6][j6]] = 0;
-							}
-						}
-					}
-
-					else
-					{
-						for (int i6 = 3; i6 < 6; i6++)
-						{
-							for (int j9 = 6; j9 < 9; j9++)
-							{
-								if (ch[sd[i6][j9]] == 1)
-									ch[sd[i6][j9]] = 0;
-							}
-						}
-					}
-				}
-
+		for (int k = 1; k <= 9; k++)
+		{
+			if (!rowcheck[row][k] && !colcheck[col][k] && !sqrcheck[sqrnum][k])
+			{
+				sd[row][col] = k;
+				rowcheck[row][k] = true;
+				colcheck[col][k] = true;
+				sqrcheck[sqrnum][k] = true;
+				if (col == 8)
+					sdoku_1(row + 1, 0);
 				else
-				{
-					if (j < 3)
-					{
-						for (int i9 = 6; i9 < 9; i9++)
-						{
-							for (int j3 = 0; j3 < 3; j3++)
-							{
-								if (ch[sd[i9][j3]] == 1)
-									ch[sd[i9][j3]] = 0;
-							}
-						}
-					}
-
-					else if (j < 6)
-					{
-						for (int i9 = 6; i9 < 9; i9++)
-						{
-							for (int j6 = 3; j6 < 6; j6++)
-							{
-								if (ch[sd[i9][j6]] == 1)
-									ch[sd[i9][j6]] = 0;
-							}
-						}
-					}
-
-					else
-					{
-						for (int i9 = 6; i9 < 9; i9++)
-						{
-							for (int j9 = 6; j9 < 9; j9++)
-							{
-								if (ch[sd[i9][j9]] == 1)
-									ch[sd[i9][j9]] = 0;
-							}
-						}
-					}
-				}
-
-				for (int b = 1; b < 10; b++)
-					if (ch[b] == 1)
-						sd[i][j] = b;
+					sdoku_1(row, col + 1);
+				sd[row][col] = 0;
+				rowcheck[row][k] = false;
+				colcheck[col][k] = false;
+				sqrcheck[sqrnum][k] = false;
 			}
 		}
+	}
+	else
+	{
+		if (col == 8)
+			sdoku_1(row + 1, 0);
+		else
+			sdoku_1(row, col + 1);
 	}
 }
 
 int main()
 {
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+			cin >> sd[i][j];
+	}
 
 	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < 9; j++)
-		{
-			cin >> sd[i][j];
-		}
+			if (sd[i][j])
+			{
+				int sqrnum = (i / 3) * 3 + (j / 3);
+				rowcheck[i][sd[i][j]] = true;
+				colcheck[j][sd[i][j]] = true;
+				sqrcheck[sqrnum][sd[i][j]] = true;
+			}
 	}
 
 	sdoku_1();
-
-	for (int i = 0; i < 9; i++)
-	{
-		for (int j = 0; j < 9; j++)
-		{
-			cout << sd[i][j] << " ";
-		}
-		cout << "\n";
-	}
 }
