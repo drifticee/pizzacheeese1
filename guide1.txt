@@ -8,3 +8,6 @@ git push					(commit 해놓은 그러니까 stage에 올라간 파일들이 업�
 git pull 하면 바로 병합되지만 바뀐 내용 알 수 없음 (Already up to date 라는 문구만 나옴. 뭐지?)
 
 2.
+git fetch
+git branch -a
+git merge __branch 이름__
