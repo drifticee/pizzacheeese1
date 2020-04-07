@@ -1,6 +1,8 @@
  - 로컬에서 원격으로 옮기기
 git add "파일이름.확장자" 			(입력한 순간의 버전으로 저장될 예정)
-git commit -m "커밋하며 적을 메시지 입력" 	(그냥 git commit은 뭐가 뭔지 모르겠다 나중에 활용하자)
+git commit -m "커밋하며 적을 메시지 입력" 	(git commit 입력시 Vi 에디터로 들어감, https://cau-dosc.github.io/how-to-write-commit-messages-using-vi.html
+					(위 주소 참조해도 됨. 간략하게 하자면 에디터로 접속 시
+					(i로 edit mode, esc로 탈출 후 :wq 입력 후 엔터 하면 에디터 종료)
 git push					(commit 해놓은 그러니까 stage에 올라간 파일들이 업로드 되는 듯?)
 
  - 원격에서 로컬로 옮기기
@@ -11,3 +13,7 @@ git pull 하면 바로 병합되지만 바뀐 내용 알 수 없음 (Already up 
 git fetch
 git branch -a
 git merge __branch 이름__
+
+대충 이렇게만 알자
+
+왜 윗줄은 수정이 안 되냐
