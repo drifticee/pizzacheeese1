@@ -1,0 +1,12 @@
+
+select ename, '(', empno ,')'
+from emp ; 
+
+select ename|| '('|| empno || ')'
+from emp ;
+
+ select ename  as name, sal*7  "7sal"
+ from emp ; 
+  별칭 지정시 "" 사용시점
+ 1) 대소문자 구분해서 표시할때 
+ 2)  숫자/특수문자 별칭 앞/중간에 포함된 경우
