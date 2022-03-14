@@ -1,0 +1,21 @@
+create table 고객 (
+ 번호 number(5) primary key, 
+ 이름 varchar2(20) not null , 
+ 전화번호 varchar2(15) unique, 
+ 성별  char(4) check (성별 in ('남자','여자')) ,
+ 주소 varchar2(30) ) ; 
+
+select * from 고객; 
+insert into 고객 values 
+ (1,'홍길동','1234','남자','서울') ; 
+insert into 고객 values 
+ (2,'박길동','1234','여자','인천') ; -- 에러발생
+
+ select  이름, 전화번호  from 고객; 
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+ 테이블자료 조회시 결과표시되는 순서는? 
+  -->자료가 저장되어있는 순서대로 꺼내서 보여줌 
+ select ename, sal from emp ; 
+
+특정컬럼 기준 정렬된 결과로 조회하고 싶은 경우 
+ order by 절 사용함 
+1) select ename, sal from emp  order by sal ; 
+   -->sal값 가장작은것부터 먼저  뒷줄은 값이 올라감
+       오름차순정렬기본 적용됨. 
+2)  select ename, sal from emp  order by sal  desc; 
+     -->내림차순 정렬시 desc 키워드 사용함. 
+
+
+정렬시 널값위치 확인
+1) select ename, comm
+   from emp 
+   order by comm ; 
+
+2)  select ename, comm
+    from emp 
+    order by comm desc; 
+  --> 널값은 오름차순정렬시 마지막, 
+             내림차순 정렬시 처음에 표시됨. 
+3) select ename, comm
+    from emp 
+    order by comm desc NULLS LAST; 
+
+ 여러개 컬럼으로 정렬수행시
+1) select ename, deptno,sal
+   from emp 
+   order by deptno desc; 
+
+2) select ename, deptno,sal
+   from emp 
+   order by deptno desc , sal  ;
+
+3) select ename, deptno,sal
+   from emp 
+   order by deptno desc , sal desc  ;
+
+
+
+
+
+
+
+
+
+
+
+
+
